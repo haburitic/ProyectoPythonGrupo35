@@ -63,7 +63,21 @@ def addContactobd():
         db.Contacts.insert_one(Empleado)
         return dumps({'response',"Sussess"})
 
+
+@app.route('/contactoConsultaDb',methods = ['POST'] )
+def recibirContactoConsultaDb():
+    try:
+        for x in db.Contacts.find():
+            print(x)
+
+        return json.loads(request.data)
+    except Exception as error:
+        return dump({'Error': error})
+
     except Exception as error:
         return dumps({'Error addContacto',error})
+
+
+
 if __name__ =='__main__':
     app.run(debug=True)
